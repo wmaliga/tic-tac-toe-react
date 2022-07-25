@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+const boardSize = 3;
+
 function Square(props) {
   return (
     <button
@@ -21,25 +23,18 @@ class Board extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
+    const rows = [];
+    let id = 0;
+
+    for (let row = 0; row < boardSize; row++) {
+      const cols = [];
+      for (let col = 0; col < boardSize; col++) {
+        cols.push(this.renderSquare(id++))
+      }
+      rows.push(<div className="board-row">{cols}</div>);
+    }
+
+    return <div>{rows}</div>;
   }
 }
 
